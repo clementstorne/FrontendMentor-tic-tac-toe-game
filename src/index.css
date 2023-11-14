@@ -28,12 +28,14 @@
     font-size: 16px;
     letter-spacing: 1px;
     text-transform: uppercase;
+    text-align: center;
   }
 }
 
 @layer components {
   .big-btn {
-    width: 460px;
+    width: 100%;
+    max-width: 460px;
     height: 67px;
     border-radius: 15px;
     padding-top: 17px;
@@ -54,6 +56,34 @@
     letter-spacing: 1px;
     text-transform: uppercase;
     color: theme("colors.dark-navy");
+  }
+
+  .tile {
+    width: 100%;
+    max-width: 460px;
+    border-radius: 15px;
+    padding: 24px 24px 30px;
+    background-color: theme("colors.semi-dark-navy");
+    box-shadow: inset 0px -8px #10212a;
+  }
+
+  .toggle {
+    width: 100%;
+    height: 72px;
+    border-radius: 10px;
+    padding: 9px 8px;
+    background-color: theme("colors.dark-navy");
+    cursor: pointer;
+  }
+
+  .mark-selector {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
   }
 }
 
