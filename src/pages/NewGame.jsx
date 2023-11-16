@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Cell from "../components/Cell";
 
 function NewGame() {
   const [isPlayerMarkO, setIsPlayerMarkO] = useState(true);

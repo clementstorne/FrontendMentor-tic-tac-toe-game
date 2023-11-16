@@ -85,6 +85,23 @@
     justify-content: center;
     align-items: center;
   }
+
+  .cell {
+    display: block;
+    min-width: 96px;
+    width: 100%;
+    max-width: 140px;
+    min-height: 96px;
+    height: 100%;
+    max-height: 140px;
+    border-radius: 10px;
+    background-color: theme("colors.semi-dark-navy");
+    box-shadow: inset 0px -8px #10212a;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 @layer utilities {
