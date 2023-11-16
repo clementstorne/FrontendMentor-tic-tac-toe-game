@@ -1,5 +1,3 @@
-function Cell() {
-  return <div className="cell">x</div>;
+export default function Cell() {
+  return <div className="cell" data-testid="cell"></div>;
 }
-
-export default Cell;

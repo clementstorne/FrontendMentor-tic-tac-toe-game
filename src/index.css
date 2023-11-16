@@ -58,6 +58,14 @@
     color: theme("colors.dark-navy");
   }
 
+  .reset-btn {
+    width: 52px;
+    height: 52px;
+    border-radius: 10px;
+    padding: 16px;
+    box-shadow: inset 0px -4px #6b8997;
+  }
+
   .tile {
     width: 100%;
     max-width: 460px;
@@ -117,7 +125,7 @@
     box-shadow: inset 0px -8px #118c87;
   }
 
-  .silver-btn-big-shadow {
-    box-shadow: inset 0px -8px #6b8997;
+  .silver-btn-small-shadow {
+    box-shadow: inset 0px -4px #6b8997;
   }
 }
