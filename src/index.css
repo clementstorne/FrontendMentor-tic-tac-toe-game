@@ -110,6 +110,35 @@
     justify-content: center;
     align-items: center;
   }
+
+  .game-container {
+    min-width: 328px;
+    max-width: 460px;
+    min-height: 516px;
+    max-height: 623px;
+    margin: auto;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .score {
+    display: block;
+    min-width: 96px;
+    width: 100%;
+    max-width: 140px;
+    min-height: 64px;
+    height: 64px;
+    /* height: 100%; */
+    max-height: 72px;
+    border-radius: 10px;
+    /* padding: 8px 22px; */
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 @layer utilities {
