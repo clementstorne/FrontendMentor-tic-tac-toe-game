@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-export default function Score(props) {
+export default function ScoreDisplay(props) {
   const defineTitle = (type, typeOfGame, player) => {
     if (type === "x") {
       if (typeOfGame === "vsCPU") {
@@ -54,7 +54,7 @@ export default function Score(props) {
   );
 }
 
-Score.propTypes = {
+ScoreDisplay.propTypes = {
   score: PropTypes.number.isRequired,
   type: "x" | "o" | "ties",
   typeOfGame: "vsCPU" | "vsPlayer",
