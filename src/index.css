@@ -15,6 +15,7 @@
     font-weight: 700;
     font-size: 24px;
     letter-spacing: 1.5px;
+    line-height: 30px;
     text-transform: uppercase;
   }
   h3 {
@@ -62,7 +63,6 @@
     width: 52px;
     height: 52px;
     border-radius: 10px;
-    padding: 16px;
     box-shadow: inset 0px -4px #6b8997;
   }
 
@@ -144,6 +144,38 @@
     color: theme("colors.silver");
     font-weight: 700;
     letter-spacing: 0.88px;
+  }
+
+  .modal-overlay {
+    z-index: 5;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .modal {
+    z-index: 10;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100vw;
+    margin: 0;
+    padding: 61px 35px;
+    background-color: theme("colors.semi-dark-navy");
+    text-align: center;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .show {
+    opacity: 1;
+    pointer-events: visible;
   }
 }
 

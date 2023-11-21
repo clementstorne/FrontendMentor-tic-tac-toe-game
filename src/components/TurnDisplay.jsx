@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 export default function TurnDisplay(props) {
   return (
     <div className="turn w-24 h-10 md:w-[140px] md:h-[52px] pt-2.5 md:pt-[13px] px-[15px] md:px-[30px] pb-3.5 md:pb-[19px] ">
@@ -16,5 +18,5 @@ export default function TurnDisplay(props) {
 }
 
 TurnDisplay.propTypes = {
-  turn: "x" | "o",
+  turn: PropTypes.oneOf(["x", "o"]),
 };

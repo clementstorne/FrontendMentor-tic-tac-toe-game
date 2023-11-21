@@ -56,7 +56,7 @@ export default function ScoreDisplay(props) {
 
 ScoreDisplay.propTypes = {
   score: PropTypes.number.isRequired,
-  type: "x" | "o" | "ties",
-  typeOfGame: "vsCPU" | "vsPlayer",
-  player: "player1" | "player2",
+  type: PropTypes.oneOf(["x", "o", "ties"]),
+  typeOfGame: PropTypes.oneOf(["vsCPU", "vsPlayer"]),
+  player: PropTypes.oneOf(["player1", "player2"]),
 };
