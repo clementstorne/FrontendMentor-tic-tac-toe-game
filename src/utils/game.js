@@ -1,8 +1,9 @@
-const updateBoard = (grid, index, mark) => {
-  if (grid[index] !== "") {
+const updateBoard = (gameBoard, index, mark) => {
+  if (gameBoard[index] !== "") {
     throw new Error("That cell is already taken");
   } else {
-    grid.splice(index, 1, mark);
+    gameBoard.splice(index, 1, mark);
+    return gameBoard;
   }
 };
 

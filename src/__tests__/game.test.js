@@ -11,10 +11,9 @@ describe("Tic Tac Toe Game Functions", () => {
   describe("updateBoard", () => {
     test("should update the board with the correct mark", () => {
       const initialBoard = createGameBoard();
-      const updatedBoard = [...initialBoard];
       const index = 0;
       const mark = "x";
-      updateBoard(updatedBoard, index, mark);
+      const updatedBoard = updateBoard(initialBoard, index, mark);
       expect(updatedBoard[[index]]).toBe(mark);
     });
 
