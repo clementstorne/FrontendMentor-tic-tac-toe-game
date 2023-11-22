@@ -20,6 +20,7 @@ const gameSlice = createSlice({
       state.gameBoard = [
         ...updateBoard(state.gameBoard, action.payload, state.turn),
       ];
+      state.turn = state.turn === "x" ? "o" : "x";
     },
     clearBoard: (state) => {
       state.gameBoard = createGameBoard();
