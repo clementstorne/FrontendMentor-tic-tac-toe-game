@@ -29,13 +29,17 @@ export default function RestartModal() {
   return (
     <div className={`modal-overlay ${isOpen ? "show" : ""}`}>
       <div
-        className={`modal ${isOpen ? "show" : ""}`}
+        className={`modal py-[61px] px-[35px] md:py-[67px] ${
+          isOpen ? "show" : ""
+        }`}
         aria-hidden={!isOpen}
         role="dialog"
         aria-describedby="modal-text"
       >
-        <h2>Restart game?</h2>
-        <div className="flex flex-row flex-nowrap justify-between items-center pt-6">
+        <h2 className="md:text-3xl md:leading-[50px] md:tracking-[2.5px]">
+          Restart game?
+        </h2>
+        <div className="w-[306px] mx-auto flex flex-row flex-nowrap justify-between items-center pt-6 md:pt-[31px]">
           <SmallButton text="No, cancel" color="silver" onClick={toggleModal} />
           <SmallButton text="Yes, restart" color="yellow" />
         </div>

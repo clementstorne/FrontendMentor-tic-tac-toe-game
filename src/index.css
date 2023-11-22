@@ -147,7 +147,7 @@
   }
 
   .modal-overlay {
-    z-index: 5;
+    z-index: 10;
     position: absolute;
     top: 0;
     right: 0;
@@ -159,14 +159,13 @@
   }
 
   .modal {
-    z-index: 10;
+    z-index: 100;
     position: absolute;
     left: 0;
     top: 50%;
     transform: translateY(-50%);
     width: 100vw;
     margin: 0;
-    padding: 61px 35px;
     background-color: theme("colors.semi-dark-navy");
     text-align: center;
     opacity: 0;
