@@ -1,16 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createGameBoard } from "../utils/gameBoard";
-import { updateBoard } from "../utils/game";
+import { updateBoard, hasSomeoneWon } from "../utils/game";
 
 const initialState = {
   gameBoard: createGameBoard(),
-  scores: {
-    x: 0,
-    o: 0,
-    ties: 0,
-  },
+  xScore: 0,
+  oScore: 0,
+  ties: 0,
   turn: "x",
   isGameActive: true,
+  whoStarts: "x",
 };
 
 const gameSlice = createSlice({
@@ -21,16 +20,39 @@ const gameSlice = createSlice({
       state.gameBoard = [
         ...updateBoard(state.gameBoard, action.payload, state.turn),
       ];
-      state.turn = state.turn === "x" ? "o" : "x";
+      const numberOfTurns = state.gameBoard.filter(Boolean).length;
+      if (numberOfTurns >= 5) {
+        if (hasSomeoneWon(state.gameBoard)) {
+          state.turn === "x" ? state.xScore++ : state.oScore++;
+          state.whoStarts = state.whoStarts === "x" ? "o" : "x";
+          state.isGameActive = false;
+        } else if (numberOfTurns === 9) {
+          state.ties++;
+          state.whoStarts = state.whoStarts === "x" ? "o" : "x";
+          state.isGameActive = false;
+        } else {
+          state.turn = state.turn === "x" ? "o" : "x";
+        }
+      } else {
+        state.turn = state.turn === "x" ? "o" : "x";
+      }
     },
     clearBoard: (state) => {
       state.gameBoard = createGameBoard();
     },
-    // updateScores: (state, action) => {
-    //   state.scores =
-    // }
+    endOfRound: (state) => {
+      state.isGameActive = false;
+      state.whoStarts = state.whoStarts === "x" ? "o" : "x";
+      state.gameBoard = createGameBoard();
+    },
+    newRound: (state) => {
+      state.gameBoard = createGameBoard();
+      state.turn = state.whoStarts;
+      state.isGameActive = true;
+    },
   },
 });
 
-export const { updateGameBoard, clearBoard } = gameSlice.actions;
+export const { updateGameBoard, clearBoard, endOfRound, newRound } =
+  gameSlice.actions;
 export default gameSlice.reducer;

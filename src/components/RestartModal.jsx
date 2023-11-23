@@ -1,18 +1,18 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { closeModal } from "../store/modalSlice.js";
-import { clearBoard } from "../store/gameSlice.js";
+import { closeResetModal } from "../store/resetModalSlice.js";
+import { newRound } from "../store/gameSlice.js";
 
 import SmallButton from "./SmallButton";
 
 export default function RestartModal() {
   const dispatch = useDispatch();
 
-  const isOpen = useSelector((state) => state.modal.isOpen);
+  const isOpen = useSelector((state) => state.resetModal.isOpen);
 
   function closeOnEscapeKeyDown(e) {
     if ((e.charCode || e.keyCode) === 27) {
-      dispatch(closeModal());
+      dispatch(closeResetModal());
     }
   }
 
@@ -40,14 +40,14 @@ export default function RestartModal() {
           <SmallButton
             text="No, cancel"
             color="silver"
-            onClick={() => dispatch(closeModal())}
+            onClick={() => dispatch(closeResetModal())}
           />
           <SmallButton
             text="Yes, restart"
             color="yellow"
             onClick={() => {
-              dispatch(clearBoard());
-              dispatch(closeModal());
+              dispatch(newRound());
+              dispatch(closeResetModal());
             }}
           />
         </div>

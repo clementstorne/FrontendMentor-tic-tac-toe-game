@@ -1,10 +1,12 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 
-import modalReducer from "./modalSlice.js";
+import resetModalReducer from "./resetModalSlice.js";
+import endOfRoundModalReducer from "./endOfRoundModalSlice.js";
 import gameReducer from "./gameSlice.js";
 
 const reducer = combineReducers({
-  modal: modalReducer,
+  resetModal: resetModalReducer,
+  endOfRoundModal: endOfRoundModalReducer,
   game: gameReducer,
 });
 

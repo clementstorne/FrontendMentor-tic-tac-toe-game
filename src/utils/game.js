@@ -33,16 +33,10 @@ const hasSomeoneWon = (gameBoard) => {
   return false;
 };
 
-const checkWinner = (gameBoard, currentPlayer) => {
-  if (hasSomeoneWon(gameBoard)) {
-    return currentPlayer;
-  }
-};
-
 const isItATie = (gameBoard) => {
   if (!gameBoard.includes("") && !hasSomeoneWon(gameBoard)) {
     return true;
   }
 };
 
-export { updateBoard, hasSomeoneWon, checkWinner, isItATie };
+export { updateBoard, hasSomeoneWon, isItATie };
