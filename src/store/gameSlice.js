@@ -10,6 +10,7 @@ const initialState = {
     ties: 0,
   },
   turn: "x",
+  isGameActive: true,
 };
 
 const gameSlice = createSlice({
@@ -25,6 +26,9 @@ const gameSlice = createSlice({
     clearBoard: (state) => {
       state.gameBoard = createGameBoard();
     },
+    // updateScores: (state, action) => {
+    //   state.scores =
+    // }
   },
 });
 

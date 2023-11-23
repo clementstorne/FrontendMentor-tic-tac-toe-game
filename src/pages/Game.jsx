@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { openModal } from "../store/modalSlice";
 import { updateGameBoard } from "../store/gameSlice";
@@ -7,6 +8,7 @@ import ResetButton from "../components/ResetButton";
 import ScoreDisplay from "../components/ScoreDisplay";
 import TurnDisplay from "../components/TurnDisplay";
 import RestartModal from "../components/RestartModal";
+import { hasSomeoneWon } from "../utils/game";
 
 export default function Game() {
   const dispatch = useDispatch();
@@ -14,6 +16,12 @@ export default function Game() {
   const gameBoard = useSelector((state) => state.game.gameBoard);
   const scores = useSelector((state) => state.game.scores);
   const turn = useSelector((state) => state.game.turn);
+
+  useEffect(() => {
+    if (hasSomeoneWon(gameBoard)) {
+      console.log("WIN");
+    }
+  }, [gameBoard]);
 
   return (
     <div>
