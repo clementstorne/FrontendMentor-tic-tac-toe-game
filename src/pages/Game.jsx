@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { openResetModal } from "../store/resetModalSlice";
-import { openEndOfRoundModal } from "../store/resetModalSlice";
+import { openEndOfRoundModal } from "../store/endOfRoundModalSlice";
 import { updateGameBoard } from "../store/gameSlice";
 
 import Cell from "../components/Cell";
@@ -9,6 +9,8 @@ import ResetButton from "../components/ResetButton";
 import ScoreDisplay from "../components/ScoreDisplay";
 import TurnDisplay from "../components/TurnDisplay";
 import RestartModal from "../components/RestartModal";
+import EndOfRoundModal from "../components/EndOfRoundModal";
+
 import { hasSomeoneWon } from "../utils/game";
 
 export default function Game() {
@@ -24,15 +26,14 @@ export default function Game() {
     const numberOfTurns = gameBoard.filter(Boolean).length;
     if (numberOfTurns >= 5) {
       if (hasSomeoneWon(gameBoard)) {
-        dispatch(() => {
-          openEndOfRoundModal();
-        });
+        dispatch(openEndOfRoundModal());
       }
     }
-  }, [gameBoard]);
+  }, [gameBoard, dispatch]);
 
   return (
     <div>
+      <EndOfRoundModal />
       <RestartModal />
       <div className="w-[328px] md:w-[460px] h-screen  my-6 mx-auto md:flex md: flex-col md:justify-center md:items-center">
         <header className="relative w-full grid grid-cols-3 items-center">
