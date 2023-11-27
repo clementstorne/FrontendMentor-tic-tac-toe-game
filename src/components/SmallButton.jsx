@@ -7,7 +7,7 @@ export default function SmallButton(props) {
         props.color === "silver"
           ? "silver-btn-small-shadow bg-silver hover:bg-silver-hover"
           : "yellow-btn-small-shadow bg-light-yellow hover:bg-light-yellow-hover"
-      }`}
+      } ${props.spaceAfter ? "mr-4" : ""}`}
       onClick={props.onClick}
     >
       {props.text}
@@ -19,4 +19,5 @@ SmallButton.propTypes = {
   text: PropTypes.string.isRequired,
   color: PropTypes.string,
   onClick: PropTypes.func,
+  spaceAfter: PropTypes.bool,
 };

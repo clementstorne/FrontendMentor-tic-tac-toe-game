@@ -8,6 +8,7 @@ export default function BigButton(props) {
           ? "blue-btn-big-shadow bg-light-blue hover:bg-light-blue-hover"
           : "yellow-btn-big-shadow bg-light-yellow hover:bg-light-yellow-hover"
       }  ${props.spaceAfter ? "mb-4" : ""}`}
+      onClick={props.onClick}
     >
       {props.text}
     </button>
@@ -17,5 +18,6 @@ export default function BigButton(props) {
 BigButton.propTypes = {
   text: PropTypes.string.isRequired,
   color: PropTypes.string,
+  onClick: PropTypes.func,
   spaceAfter: PropTypes.bool,
 };

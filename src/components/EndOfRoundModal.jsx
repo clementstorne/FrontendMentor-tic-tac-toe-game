@@ -1,22 +1,28 @@
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { closeEndOfRoundModal } from "../store/endOfRoundModalSlice.js";
+import { quitGame } from "../store/gameSlice.js";
 import { newRound } from "../store/gameSlice.js";
 
 import SmallButton from "./SmallButton.jsx";
 
 export default function EndOfRoundModal() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  // const isOpen = useSelector((state) => state.endOfRoundModal.isOpen);
-  const isOpen = true;
+  const isOpen = useSelector((state) => state.endOfRoundModal.isOpen);
   const winner = useSelector((state) => state.game.turn);
 
-  function closeOnEscapeKeyDown(e) {
+  const closeOnEscapeKeyDown = (e) => {
     if ((e.charCode || e.keyCode) === 27) {
       dispatch(closeEndOfRoundModal());
     }
-  }
+  };
+
+  const navigateHome = () => {
+    navigate("/");
+  };
 
   useEffect(() => {
     document.body.addEventListener("keydown", closeOnEscapeKeyDown);
@@ -43,11 +49,16 @@ export default function EndOfRoundModal() {
         >
           {winner} takes the round
         </h2>
-        <div className="w-[306px] mx-auto flex flex-row flex-nowrap justify-between items-center pt-6 md:pt-[31px]">
+        <div className="w-[306px] mx-auto flex flex-row flex-nowrap justify-center items-center pt-6 md:pt-[31px]">
           <SmallButton
             text="Quit"
             color="silver"
-            onClick={() => dispatch(closeEndOfRoundModal())}
+            spaceAfter={true}
+            onClick={() => {
+              dispatch(closeEndOfRoundModal());
+              dispatch(quitGame());
+              navigateHome();
+            }}
           />
           <SmallButton
             text="Next round"

@@ -4,11 +4,21 @@ import { updateBoard, hasSomeoneWon } from "../utils/game";
 
 const initialState = {
   gameBoard: createGameBoard(),
-  xScore: 0,
-  oScore: 0,
+  typeOfGame: null,
+  player1: {
+    mark: null,
+    score: 0,
+    won: false,
+  },
+  player2: {
+    type: null,
+    mark: null,
+    score: 0,
+    won: false,
+  },
   ties: 0,
   turn: "x",
-  isGameActive: true,
+  isGameActive: false,
   whoStarts: "x",
 };
 
@@ -16,6 +26,15 @@ const gameSlice = createSlice({
   name: "game",
   initialState,
   reducers: {
+    newGame: (state, action) => {
+      state.gameBoard = createGameBoard();
+      state.isGameActive = true;
+      state.typeOfGame = action.payload.typeOfGame;
+      state.player1.mark = action.payload.player1Mark;
+      state.player2.type =
+        action.payload.typeOfGame === "vsCPU" ? "CPU" : "player";
+      state.player2.mark = action.payload.player1Mark === "x" ? "o" : "x";
+    },
     updateGameBoard: (state, action) => {
       state.gameBoard = [
         ...updateBoard(state.gameBoard, action.payload, state.turn),
@@ -23,7 +42,9 @@ const gameSlice = createSlice({
       const numberOfTurns = state.gameBoard.filter(Boolean).length;
       if (numberOfTurns >= 5) {
         if (hasSomeoneWon(state.gameBoard)) {
-          state.turn === "x" ? state.xScore++ : state.oScore++;
+          state.turn === state.player1.mark
+            ? state.player1.score++
+            : state.player2.score++;
           state.whoStarts = state.whoStarts === "x" ? "o" : "x";
           state.isGameActive = false;
         } else if (numberOfTurns === 9) {
@@ -50,9 +71,16 @@ const gameSlice = createSlice({
       state.turn = state.whoStarts;
       state.isGameActive = true;
     },
+    quitGame: () => initialState,
   },
 });
 
-export const { updateGameBoard, clearBoard, endOfRound, newRound } =
-  gameSlice.actions;
+export const {
+  newGame,
+  updateGameBoard,
+  clearBoard,
+  endOfRound,
+  newRound,
+  quitGame,
+} = gameSlice.actions;
 export default gameSlice.reducer;
