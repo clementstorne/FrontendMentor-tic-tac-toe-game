@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createGameBoard } from "../utils/gameBoard";
-import { updateBoard, hasSomeoneWon } from "../utils/game";
+import { updateBoard, hasSomeoneWon, whoWon } from "../utils/game";
 
 const initialState = {
   gameBoard: createGameBoard(),
@@ -20,6 +20,7 @@ const initialState = {
   turn: "x",
   isGameActive: false,
   whoStarts: "x",
+  winner: null,
 };
 
 const gameSlice = createSlice({
@@ -42,13 +43,15 @@ const gameSlice = createSlice({
       const numberOfTurns = state.gameBoard.filter(Boolean).length;
       if (numberOfTurns >= 5) {
         if (hasSomeoneWon(state.gameBoard)) {
-          state.turn === state.player1.mark
+          state.winner = whoWon(state.gameBoard);
+          state.winner === state.player1.mark
             ? state.player1.score++
             : state.player2.score++;
           state.whoStarts = state.whoStarts === "x" ? "o" : "x";
           state.isGameActive = false;
         } else if (numberOfTurns === 9) {
           state.ties++;
+          state.winner = null;
           state.whoStarts = state.whoStarts === "x" ? "o" : "x";
           state.isGameActive = false;
         } else {
@@ -61,15 +64,11 @@ const gameSlice = createSlice({
     clearBoard: (state) => {
       state.gameBoard = createGameBoard();
     },
-    endOfRound: (state) => {
-      state.isGameActive = false;
-      state.whoStarts = state.whoStarts === "x" ? "o" : "x";
-      state.gameBoard = createGameBoard();
-    },
     newRound: (state) => {
       state.gameBoard = createGameBoard();
       state.turn = state.whoStarts;
       state.isGameActive = true;
+      state.winner = null;
     },
     quitGame: () => initialState,
   },

@@ -14,7 +14,7 @@ export default function EndOfRoundModal() {
   const isOpen = useSelector((state) => state.endOfRoundModal.isOpen);
   const typeOfGame = useSelector((state) => state.game.typeOfGame);
   const player1 = useSelector((state) => state.game.player1.mark);
-  const winner = useSelector((state) => state.game.turn);
+  const winner = useSelector((state) => state.game.winner);
 
   const closeOnEscapeKeyDown = (e) => {
     if ((e.charCode || e.keyCode) === 27) {
@@ -36,33 +36,52 @@ export default function EndOfRoundModal() {
   return (
     <div className={`modal-overlay ${isOpen ? "show" : ""}`}>
       <div
-        className={`modal pt-10 pb-12 px-[35px] md:py-[67px] ${
-          isOpen ? "show" : ""
-        }`}
+        className={`modal px-[35px] 
+        ${
+          winner === null
+            ? "py-[61px] md:py-[67px]"
+            : "pt-10 pb-12 md:py-[45px]"
+        } 
+        ${isOpen ? "show" : ""}`}
         aria-hidden={!isOpen}
         role="dialog"
         aria-describedby="modal-text"
       >
-        <h4 className="mb-4">
-          {typeOfGame === "vsPlayer"
-            ? winner === player1
-              ? "Player 1 wins!"
-              : "Player 2 wins"
-            : winner === player1
-            ? "You won!"
-            : "Oh no, you lost…"}
-        </h4>
+        {winner !== null ? (
+          <h4 className="mb-4">
+            {typeOfGame === "vsPlayer"
+              ? winner === player1
+                ? "Player 1 wins!"
+                : "Player 2 wins"
+              : winner === player1
+              ? "You won!"
+              : "Oh no, you lost…"}
+          </h4>
+        ) : (
+          ""
+        )}
         <h2
-          className={`flex flex-row flex-nowrap md:text-3xl md:leading-[50px] md:tracking-[2.5px] ${
-            winner === "x" ? "text-light-blue" : "text-light-yellow"
+          className={`flex flex-row flex-nowrap justify-center items-center md:text-3xl md:leading-[50px] md:tracking-[2.5px] 
+          ${
+            winner === "x"
+              ? "text-light-blue"
+              : winner === "o"
+              ? "text-light-yellow"
+              : "text-silver"
           }`}
         >
           {winner === "x" ? (
             <img src="./icon-x.svg" alt="x" width="28" height="28" />
-          ) : (
+          ) : winner === "o" ? (
             <img src="./icon-o.svg" alt="o" width="28" height="28" />
+          ) : (
+            ""
           )}
-          <span className="ml-2">takes the round</span>
+          {winner !== null ? (
+            <span className="ml-2">takes the round</span>
+          ) : (
+            "Round tied"
+          )}
         </h2>
         <div className="w-[306px] mx-auto flex flex-row flex-nowrap justify-center items-center pt-6 md:pt-[31px]">
           <SmallButton

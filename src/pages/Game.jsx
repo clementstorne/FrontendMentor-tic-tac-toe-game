@@ -12,7 +12,7 @@ import TurnDisplay from "../components/TurnDisplay";
 import RestartModal from "../components/RestartModal";
 import EndOfRoundModal from "../components/EndOfRoundModal";
 
-import { hasSomeoneWon } from "../utils/game";
+import { hasSomeoneWon, isItATie } from "../utils/game";
 
 export default function Game() {
   const dispatch = useDispatch();
@@ -27,7 +27,7 @@ export default function Game() {
   useEffect(() => {
     const numberOfTurns = gameBoard.filter(Boolean).length;
     if (numberOfTurns >= 5) {
-      if (hasSomeoneWon(gameBoard)) {
+      if (hasSomeoneWon(gameBoard) || isItATie(gameBoard)) {
         dispatch(openEndOfRoundModal());
       }
     }

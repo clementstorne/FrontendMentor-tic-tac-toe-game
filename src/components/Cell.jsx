@@ -13,7 +13,10 @@ export default function Cell(props) {
         props.mark === "" ? "cursor-pointer" : ""
       }`}
       data-testid="cell"
-      onClick={props.onClick}
+      onClick={() => {
+        props.onClick();
+        setIsHovered(false);
+      }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
