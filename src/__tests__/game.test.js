@@ -1,13 +1,24 @@
 import { describe, expect, test } from "vitest";
-import { createGameBoard } from "../utils/gameBoard";
 import {
+  createGameBoard,
   updateBoard,
   hasSomeoneWon,
-  checkWinner,
+  whoWon,
   isItATie,
 } from "../utils/game";
 
 describe("Tic Tac Toe Game Functions", () => {
+  describe("createGameBoard", () => {
+    const gameBoard = createGameBoard();
+    test("should create an array of length 9", () => {
+      expect(gameBoard).toHaveLength(9);
+    });
+
+    test("should create an array of empty strings", () => {
+      gameBoard.forEach((el) => expect(el).toBe(""));
+    });
+  });
+
   describe("updateBoard", () => {
     test("should update the board with the correct mark", () => {
       const initialBoard = createGameBoard();
@@ -23,7 +34,7 @@ describe("Tic Tac Toe Game Functions", () => {
       const mark = "x";
       expect(() => {
         updateBoard(updatedBoard, index, mark);
-      }).toThrowError("That cell is already taken");
+      }).toThrowError("Cell at index 0 is already taken by 'x'");
     });
   });
 
@@ -37,19 +48,36 @@ describe("Tic Tac Toe Game Functions", () => {
       const nonWinningBoard = ["x", "o", "x", "", "", "", "", "", ""];
       expect(hasSomeoneWon(nonWinningBoard)).toBe(false);
     });
+
+    test("should return false if there is a tie", () => {
+      const tieBoard = ["x", "o", "x", "x", "o", "o", "o", "x", "x"];
+      expect(hasSomeoneWon(tieBoard)).toBe(false);
+    });
   });
 
   describe("checkWinner", () => {
-    test("should return the current player if there is a winner", () => {
+    test("should return the mark of the winner if there is one", () => {
       const winningBoard = ["o", "o", "o", "", "", "", "", "", ""];
-      expect(checkWinner(winningBoard, "o")).toBe("o");
+      expect(whoWon(winningBoard)).toBe("o");
+    });
+
+    test("should throw an error if there is no winner", () => {
+      const tieBoard = ["x", "o", "x", "x", "o", "o", "o", "x", "x"];
+      expect(() => {
+        whoWon(tieBoard);
+      }).toThrowError("There is no winner");
     });
   });
 
   describe("isItATie", () => {
-    test("should return true if it is a tie", () => {
+    test("should return true if there is a tie", () => {
       const tieBoard = ["x", "o", "x", "x", "o", "o", "o", "x", "x"];
       expect(isItATie(tieBoard)).toBe(true);
+    });
+
+    test("should return false if there is a winner", () => {
+      const winningBoard = ["o", "o", "o", "", "", "", "", "", ""];
+      expect(isItATie(winningBoard)).toBe(false);
     });
   });
 });

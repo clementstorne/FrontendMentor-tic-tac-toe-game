@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createGameBoard } from "../utils/gameBoard";
+import { createGameBoard } from "../utils/game";
 import { updateBoard, hasSomeoneWon, whoWon } from "../utils/game";
 
 const initialState = {

@@ -1,6 +1,14 @@
+const createGameBoard = () => {
+  let arr = [];
+  for (let i = 0; i < 9; i++) {
+    arr.push("");
+  }
+  return arr;
+};
+
 const updateBoard = (gameBoard, index, mark) => {
   if (gameBoard[index] !== "") {
-    throw new Error("That cell is already taken");
+    throw new Error(`Cell at index ${index} is already taken by '${mark}'`);
   } else {
     gameBoard.splice(index, 1, mark);
     return gameBoard;
@@ -55,12 +63,16 @@ const whoWon = (gameBoard) => {
       return gameBoard[a];
     }
   }
+
+  throw new Error("There is no winner");
 };
 
 const isItATie = (gameBoard) => {
   if (!gameBoard.includes("") && !hasSomeoneWon(gameBoard)) {
     return true;
+  } else {
+    return false;
   }
 };
 
-export { updateBoard, hasSomeoneWon, whoWon, isItATie };
+export { createGameBoard, updateBoard, hasSomeoneWon, whoWon, isItATie };

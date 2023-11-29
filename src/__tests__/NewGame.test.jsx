@@ -1,43 +1,69 @@
-import { describe, expect, test, beforeEach } from "vitest";
+import { describe, expect, test, beforeEach, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
+import { Provider } from "react-redux";
+import configureMockStore from "redux-mock-store";
+import { MemoryRouter } from "react-router-dom";
 import NewGame from "../pages/NewGame";
+import { newGame } from "../store/gameSlice";
+
+const mockStore = configureMockStore();
 
 beforeEach(() => {
-  render(<NewGame />);
+  render(
+    <Provider store={mockStore()}>
+      <MemoryRouter initialEntries={["/"]}>
+        <NewGame />
+      </MemoryRouter>
+    </Provider>
+  );
 });
 
 describe("When I am on the NewGame Page", () => {
-  test("the NewGame Page renders correctly", () => {
-    const title = screen.getByText("Pick player 1’s mark");
-    const subtitle = screen.getByText("REMEMBER : X GOES FIRST");
-    const firstButton = screen.getByText("New game (vs CPU)");
-    const secondButton = screen.getByText("New game (vs player)");
-    const gameLogo = screen.getByAltText("Game Logo");
-    const xMarkNotSelected = screen.getByAltText("X mark is not selected");
-    const oMarkSelected = screen.getByAltText("O mark is selected");
-
-    expect(title).toBeDefined();
-    expect(subtitle).toBeDefined();
-    expect(firstButton).toBeDefined();
-    expect(secondButton).toBeDefined();
-    expect(gameLogo).toBeDefined();
-    expect(xMarkNotSelected).toBeDefined();
-    expect(oMarkSelected).toBeDefined();
+  test("it renders the NewGame Page correctly", () => {
+    expect(screen.queryByAltText("Game Logo")).toBeTruthy();
+    expect(screen.queryByText("Pick player 1’s mark")).toBeTruthy();
+    expect(screen.queryByAltText("X mark is not selected")).toBeTruthy();
+    expect(screen.queryByAltText("O mark is selected")).toBeTruthy();
+    expect(screen.queryByText("REMEMBER : X GOES FIRST")).toBeTruthy();
+    expect(screen.queryByText("New game (vs CPU)")).toBeTruthy();
+    expect(screen.queryByText("New game (vs player)")).toBeTruthy();
   });
+
   describe("and I click on the mark selector", () => {
-    test("player's mark is toggled", () => {
-      const oMarkSelected = screen.getByAltText("O mark is selected");
-      const xMarkNotSelected = screen.getByAltText("X mark is not selected");
+    test("it toggles the player's mark", () => {
+      const selectedOMark = screen.getByAltText("O mark is selected");
+      const notSelectedXMark = screen.getByAltText("X mark is not selected");
 
-      expect(oMarkSelected).toBeDefined();
-      expect(xMarkNotSelected).toBeDefined();
+      expect(selectedOMark).toBeDefined();
+      expect(notSelectedXMark).toBeDefined();
 
-      fireEvent.click(oMarkSelected.parentElement);
+      fireEvent.click(selectedOMark.parentElement);
 
-      const oMarkNotSelected = screen.getByAltText("O mark is not selected");
-      const xMarkSelected = screen.getByAltText("X mark is selected");
-      expect(oMarkNotSelected).toBeDefined();
-      expect(xMarkSelected).toBeDefined();
+      const notSelectedOMark = screen.getByAltText("O mark is not selected");
+      const selectedXMark = screen.getByAltText("X mark is selected");
+
+      expect(notSelectedOMark).toBeDefined();
+      expect(selectedXMark).toBeDefined();
+    });
+  });
+
+  describe("and I click on the 'New game (vs CPU)' button", () => {
+    test("it dispatches the newGame action with the correct parameters", () => {
+      // ... votre logique de test ici
+    });
+
+    test("it navigates to the correct path", () => {
+      // ... votre logique de test ici
+    });
+  });
+
+  describe("and I click on the 'New game (vs player)' button", () => {
+    test("it dispatches the newGame action with the correct parameters", () => {
+      // ... votre logique de test ici
+    });
+
+    test("it navigates to the correct path", () => {
+      // ... votre logique de test ici
     });
   });
 });
