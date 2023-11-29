@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { createGameBoard } from "../utils/game";
 import { updateBoard, hasSomeoneWon, whoWon } from "../utils/game";
 
-const initialState = {
+export const initialState = {
   gameBoard: createGameBoard(),
   typeOfGame: null,
   player1: {

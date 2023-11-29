@@ -1,20 +1,20 @@
 import { describe, expect, test, beforeEach, vi } from "vitest";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, cleanup } from "@testing-library/react";
 import { Provider } from "react-redux";
 import configureMockStore from "redux-mock-store";
-import { MemoryRouter } from "react-router-dom";
+import { MemoryRouter, BrowserRouter } from "react-router-dom";
 import NewGame from "../pages/NewGame";
 import { newGame } from "../store/gameSlice";
+import userEvent from "@testing-library/user-event";
+import { renderWithProviders } from "./utils/utils-for-tests";
 
 const mockStore = configureMockStore();
 
 beforeEach(() => {
-  render(
-    <Provider store={mockStore()}>
-      <MemoryRouter initialEntries={["/"]}>
-        <NewGame />
-      </MemoryRouter>
-    </Provider>
+  renderWithProviders(
+    <MemoryRouter>
+      <NewGame />
+    </MemoryRouter>
   );
 });
 
@@ -48,22 +48,58 @@ describe("When I am on the NewGame Page", () => {
   });
 
   describe("and I click on the 'New game (vs CPU)' button", () => {
-    test("it dispatches the newGame action with the correct parameters", () => {
+    test("it dispatches the newGame action with the correct parameters", async () => {
+      const user = userEvent.setup();
+      await user.click(screen.getByText("New game (vs CPU)"));
       // ... votre logique de test ici
     });
 
-    test("it navigates to the correct path", () => {
-      // ... votre logique de test ici
+    test("it navigates to the correct path", async () => {
+      cleanup();
+
+      render(
+        <Provider store={mockStore()}>
+          <BrowserRouter>
+            <NewGame />
+          </BrowserRouter>
+        </Provider>
+      );
+
+      const user = userEvent.setup();
+      await user.click(screen.getByText("New game (vs CPU)"));
+
+      const currentPath = window.location.pathname;
+      const expectedPath = "/game";
+
+      expect(currentPath).toBe(expectedPath);
     });
   });
 
   describe("and I click on the 'New game (vs player)' button", () => {
-    test("it dispatches the newGame action with the correct parameters", () => {
+    test("it dispatches the newGame action with the correct parameters", async () => {
+      const user = userEvent.setup();
+      await user.click(screen.getByText("New game (vs player)"));
       // ... votre logique de test ici
     });
 
-    test("it navigates to the correct path", () => {
-      // ... votre logique de test ici
+    test("it navigates to the correct path", async () => {
+      cleanup();
+
+      render(
+        <Provider store={mockStore()}>
+          <BrowserRouter>
+            <NewGame />
+          </BrowserRouter>
+        </Provider>
+      );
+
+      const user = userEvent.setup();
+      await user.click(screen.getByText("New game (vs player)"));
+
+      const currentPath = window.location.pathname;
+      const expectedPath = "/game";
+
+      expect(currentPath).toBe(expectedPath);
     });
   });
 });
