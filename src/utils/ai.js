@@ -1,8 +1,8 @@
 import { hasSomeoneWon, whoWon, isItATie, findEmptyCells } from "./game";
 
-const evaluate = (gameBoard, iaMark) => {
+const evaluate = (gameBoard, aiMark) => {
   if (hasSomeoneWon(gameBoard)) {
-    if (whoWon(gameBoard) === iaMark) {
+    if (whoWon(gameBoard) === aiMark) {
       return 10;
     } else {
       return -10;
@@ -13,9 +13,9 @@ const evaluate = (gameBoard, iaMark) => {
   return null;
 };
 
-const minimax = (gameBoard, iaMark, depth, isMaximizing) => {
-  const score = evaluate(gameBoard, iaMark);
-  const playerMark = iaMark === "x" ? "o" : "x";
+const minimax = (gameBoard, aiMark, depth, isMaximizing) => {
+  const score = evaluate(gameBoard, aiMark);
+  const playerMark = aiMark === "x" ? "o" : "x";
 
   if (score !== null) {
     return score;
@@ -26,13 +26,8 @@ const minimax = (gameBoard, iaMark, depth, isMaximizing) => {
 
   leftMoves.forEach((move) => {
     const newBoard = [...gameBoard];
-    newBoard[move] = isMaximizing ? iaMark : playerMark;
-    const currentScore = minimax(
-      newBoard,
-      isMaximizing ? iaMark : playerMark,
-      depth + 1,
-      !isMaximizing
-    );
+    newBoard[move] = isMaximizing ? aiMark : playerMark;
+    const currentScore = minimax(newBoard, aiMark, depth + 1, !isMaximizing);
     bestScore = isMaximizing
       ? Math.max(currentScore, bestScore)
       : Math.min(currentScore, bestScore);
@@ -41,27 +36,22 @@ const minimax = (gameBoard, iaMark, depth, isMaximizing) => {
   return bestScore;
 };
 
-const findBestMove = (gameBoard, iaMark) => {
-  // let bestScore = -Infinity;
-  // let bestMove = null;
-
-  // const leftMoves = findEmptyCells(gameBoard);
-
-  // leftMoves.forEach((move) => {
-  //   const newBoard = [...gameBoard];
-  //   newBoard[move] = iaMark;
-  //   const score = minimax(newBoard, iaMark, 0, false);
-  //   if (score > bestScore) {
-  //     bestScore = score;
-  //     bestMove = move;
-  //   }
-  // });
-
-  // return bestMove;
+const findBestMove = (gameBoard, aiMark) => {
+  let bestScore = -Infinity;
+  let bestMove = null;
 
   const leftMoves = findEmptyCells(gameBoard);
-  const randomIndex = Math.floor(Math.random() * leftMoves.length);
-  return leftMoves[randomIndex];
+
+  leftMoves.forEach((move) => {
+    const newBoard = [...gameBoard];
+    newBoard[move] = aiMark;
+    const score = minimax(newBoard, aiMark, 0, false);
+    if (score > bestScore) {
+      bestScore = score;
+      bestMove = move;
+    }
+  });
+  return bestMove;
 };
 
-export { findBestMove };
+export { evaluate, minimax, findBestMove };
