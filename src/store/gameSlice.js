@@ -56,7 +56,6 @@ const gameSlice = createSlice({
       state.gameBoard = [
         ...updateBoard(state.gameBoard, action.payload, state.turn),
       ];
-      console.log(state.gameBoard);
       state.numberOfTurns++;
       if (state.numberOfTurns >= 5) {
         if (hasSomeoneWon(state.gameBoard)) {

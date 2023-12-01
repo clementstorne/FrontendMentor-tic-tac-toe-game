@@ -60,7 +60,6 @@ const findBestMove = (gameBoard, iaMark) => {
   // return bestMove;
 
   const leftMoves = findEmptyCells(gameBoard);
-  console.log(leftMoves);
   const randomIndex = Math.floor(Math.random() * leftMoves.length);
   return leftMoves[randomIndex];
 };
