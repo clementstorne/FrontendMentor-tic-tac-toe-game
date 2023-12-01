@@ -23,15 +23,15 @@ export default function Game() {
   const player2 = useSelector((state) => state.game.player2);
   const ties = useSelector((state) => state.game.ties);
   const turn = useSelector((state) => state.game.turn);
+  const numberOfTurns = useSelector((state) => state.game.numberOfTurns);
 
   useEffect(() => {
-    const numberOfTurns = gameBoard.filter(Boolean).length;
     if (numberOfTurns >= 5) {
       if (hasSomeoneWon(gameBoard) || isItATie(gameBoard)) {
         dispatch(openEndOfRoundModal());
       }
     }
-  }, [gameBoard, dispatch]);
+  }, [numberOfTurns, gameBoard, dispatch]);
 
   return (
     <>

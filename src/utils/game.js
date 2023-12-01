@@ -1,9 +1,40 @@
+const WINNING_COMBOS = [
+  [0, 1, 2],
+  [3, 4, 5],
+  [6, 7, 8],
+  [0, 3, 6],
+  [1, 4, 7],
+  [2, 5, 8],
+  [0, 4, 8],
+  [2, 4, 6],
+];
+
 const createGameBoard = () => {
   let arr = [];
   for (let i = 0; i < 9; i++) {
     arr.push("");
   }
   return arr;
+};
+
+const findEmptyCells = (gameBoard) => {
+  const emptyCells = [];
+
+  gameBoard.forEach((cell, index) => {
+    if (cell === "") {
+      emptyCells.push(index);
+    }
+  });
+
+  return emptyCells;
+};
+
+const isGameBoardFull = (gameBoard) => {
+  if (!gameBoard.includes("")) {
+    return true;
+  } else {
+    return false;
+  }
 };
 
 const updateBoard = (gameBoard, index, mark) => {
@@ -16,18 +47,7 @@ const updateBoard = (gameBoard, index, mark) => {
 };
 
 const hasSomeoneWon = (gameBoard) => {
-  const winningCombos = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
-  ];
-
-  for (const combo of winningCombos) {
+  for (const combo of WINNING_COMBOS) {
     const [a, b, c] = combo;
     if (
       gameBoard[a] &&
@@ -42,37 +62,34 @@ const hasSomeoneWon = (gameBoard) => {
 };
 
 const whoWon = (gameBoard) => {
-  const winningCombos = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
-  ];
-
-  for (const combo of winningCombos) {
-    const [a, b, c] = combo;
-    if (
-      gameBoard[a] &&
-      gameBoard[a] === gameBoard[b] &&
-      gameBoard[a] === gameBoard[c]
-    ) {
-      return gameBoard[a];
+  if (hasSomeoneWon(gameBoard)) {
+    for (const combo of WINNING_COMBOS) {
+      const [a, b, c] = combo;
+      if (
+        gameBoard[a] &&
+        gameBoard[a] === gameBoard[b] &&
+        gameBoard[a] === gameBoard[c]
+      ) {
+        return gameBoard[a];
+      }
     }
   }
-
-  throw new Error("There is no winner");
 };
 
 const isItATie = (gameBoard) => {
-  if (!gameBoard.includes("") && !hasSomeoneWon(gameBoard)) {
+  if (isGameBoardFull(gameBoard) && !hasSomeoneWon(gameBoard)) {
     return true;
   } else {
     return false;
   }
 };
 
-export { createGameBoard, updateBoard, hasSomeoneWon, whoWon, isItATie };
+export {
+  createGameBoard,
+  findEmptyCells,
+  isGameBoardFull,
+  updateBoard,
+  hasSomeoneWon,
+  whoWon,
+  isItATie,
+};
