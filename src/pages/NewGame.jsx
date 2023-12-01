@@ -21,13 +21,12 @@ function NewGame() {
 
   return (
     <div className="h-screen mx-6 flex flex-col flex-nowrap justify-center items-center">
-      <h1 className="absolute top-0 z-0 text-dark-navy ">Tic-Tac-Toe Game</h1>
-      <header className="z-10">
+      <header>
         <Link to="/">
           <img src="./logo.svg" alt="Game Logo" />
         </Link>
       </header>
-      <main className="tile my-8 z-10">
+      <main className="tile my-8 ">
         <h4>Pick player 1&rsquo;s mark</h4>
         <div
           className="toggle grid grid-cols-2 mt-6 mb-[17px]"
