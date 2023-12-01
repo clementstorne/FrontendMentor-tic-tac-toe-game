@@ -1,6 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createGameBoard } from "../utils/game";
-import { updateBoard, hasSomeoneWon, whoWon } from "../utils/game";
+import {
+  updateBoard,
+  hasSomeoneWon,
+  whoWon,
+  getWinninCellsIndexes,
+} from "../utils/game";
 import { findBestMove } from "../utils/ai";
 
 export const initialState = {
@@ -22,6 +27,7 @@ export const initialState = {
   isGameActive: false,
   whoStarts: "x",
   winner: null,
+  winningCells: [],
   numberOfTurns: 0,
 };
 
@@ -60,6 +66,7 @@ const gameSlice = createSlice({
       if (state.numberOfTurns >= 5) {
         if (hasSomeoneWon(state.gameBoard)) {
           state.winner = whoWon(state.gameBoard);
+          state.winningCells = getWinninCellsIndexes(state.gameBoard);
           state.winner === state.player1.mark
             ? state.player1.score++
             : state.player2.score++;
@@ -86,6 +93,7 @@ const gameSlice = createSlice({
           if (state.numberOfTurns >= 5) {
             if (hasSomeoneWon(state.gameBoard)) {
               state.winner = whoWon(state.gameBoard);
+              state.winningCells = getWinninCellsIndexes(state.gameBoard);
               state.winner === state.player1.mark
                 ? state.player1.score++
                 : state.player2.score++;
@@ -143,6 +151,7 @@ const gameSlice = createSlice({
       state.numberOfTurns = 0;
       state.isGameActive = true;
       state.winner = null;
+      state.winningCells = [];
       if (
         state.player2.type === "CPU" &&
         state.player2.mark === state.whoStarts

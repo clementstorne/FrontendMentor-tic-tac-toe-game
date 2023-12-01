@@ -76,6 +76,21 @@ const whoWon = (gameBoard) => {
   }
 };
 
+const getWinninCellsIndexes = (gameBoard) => {
+  if (hasSomeoneWon(gameBoard)) {
+    for (const combo of WINNING_COMBOS) {
+      const [a, b, c] = combo;
+      if (
+        gameBoard[a] &&
+        gameBoard[a] === gameBoard[b] &&
+        gameBoard[a] === gameBoard[c]
+      ) {
+        return [a, b, c];
+      }
+    }
+  }
+};
+
 const isItATie = (gameBoard) => {
   if (isGameBoardFull(gameBoard) && !hasSomeoneWon(gameBoard)) {
     return true;
@@ -91,5 +106,6 @@ export {
   updateBoard,
   hasSomeoneWon,
   whoWon,
+  getWinninCellsIndexes,
   isItATie,
 };

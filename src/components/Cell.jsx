@@ -11,6 +11,13 @@ export default function Cell(props) {
     <div
       className={`cell w-24 h-24 md:w-[140px] md:h-[140px] pt-6 px-7 pb-8 md:p-[38px] ${
         props.mark === "" ? "cursor-pointer" : ""
+      }
+      ${
+        props.winningCell
+          ? props.mark === "x"
+            ? "bg-light-blue"
+            : "bg-light-yellow"
+          : "bg-semi-dark-navy"
       }`}
       data-testid="cell"
       onClick={() => {
@@ -22,17 +29,25 @@ export default function Cell(props) {
     >
       {isHovered && props.mark === "" ? (
         activePlayer === "x" ? (
-          <img src="icon-x-hover.svg" alt="X" />
+          <img src="icon-x-outline.svg" alt="X" />
         ) : (
-          <img src="icon-o-hover.svg" alt="O" />
+          <img src="icon-o-outline.svg" alt="O" />
         )
       ) : (
         ""
       )}
       {props.mark === "x" ? (
-        <img src="icon-x.svg" alt="X" />
+        props.winningCell ? (
+          <img src="icon-x-darkNavy.svg" alt="X" />
+        ) : (
+          <img src="icon-x.svg" alt="X" />
+        )
       ) : props.mark === "o" ? (
-        <img src="icon-o.svg" alt="O" />
+        props.winningCell ? (
+          <img src="icon-o-darkNavy.svg" alt="O" />
+        ) : (
+          <img src="icon-o.svg" alt="O" />
+        )
       ) : (
         ""
       )}
@@ -43,4 +58,5 @@ export default function Cell(props) {
 Cell.propTypes = {
   mark: PropTypes.oneOf(["x", "o", ""]),
   onClick: PropTypes.func.isRequired,
+  winningCell: PropTypes.bool.isRequired,
 };

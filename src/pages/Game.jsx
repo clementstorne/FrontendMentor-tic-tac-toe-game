@@ -24,6 +24,7 @@ export default function Game() {
   const ties = useSelector((state) => state.game.ties);
   const turn = useSelector((state) => state.game.turn);
   const numberOfTurns = useSelector((state) => state.game.numberOfTurns);
+  const winningCells = useSelector((state) => state.game.winningCells);
 
   useEffect(() => {
     if (numberOfTurns >= 5) {
@@ -57,6 +58,7 @@ export default function Game() {
                 id={`cell-${index}`}
                 mark={el}
                 key={index}
+                winningCell={winningCells.includes(index)}
                 onClick={() => {
                   dispatch(updateGameBoard(index));
                 }}
