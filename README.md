@@ -16,8 +16,6 @@ This is a solution to the [Tic Tac Toe challenge on Frontend Mentor](https://www
 - [Author](#author)
 - [Acknowledgments](#acknowledgments)
 
-**Note: Delete this note and update the table of contents based on what sections you keep.**
-
 ## Overview
 
 ### The challenge
@@ -32,74 +30,41 @@ Users should be able to:
 
 ### Screenshot
 
-![](./screenshot.jpg)
-
-Add a screenshot of your solution. The easiest way to do this is to use Firefox to view your project, right-click the page and select "Take a Screenshot". You can choose either a full-height screenshot or a cropped one based on how long the page is. If it's very long, it might be best to crop it.
-
-Alternatively, you can use a tool like [FireShot](https://getfireshot.com/) to take the screenshot. FireShot has a free option, so you don't need to purchase it.
-
-Then crop/optimize/edit your image however you like, add it to your project, and update the file path in the image above.
-
-**Note: Delete this note and the paragraphs above when you add your screenshot. If you prefer not to add a screenshot, feel free to remove this entire section.**
+![Screenshot of home page](./screenshots/homepage.png)
+![Screenshot of game page](./screenshots/game.png)
+![Screenshot of the restart modal](./screenshots/restart.png)
+![Screenshot of a tied round](./screenshots/tied.png)
+![Screenshot of victory](./screenshots/x-wins.png)
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- [GitHub Repository](https://github.com/clementstorne/FrontendMentor-tic-tac-toe-game)
+- [Live Demo](https://clementstorne-tic-tac-toe-game.netlify.app/)
 
 ## My process
 
 ### Built with
 
-- Semantic HTML5 markup
-- CSS custom properties
-- Flexbox
-- CSS Grid
-- Mobile-first workflow
-- [React](https://reactjs.org/) - JS library
-- [Next.js](https://nextjs.org/) - React framework
-- [Styled Components](https://styled-components.com/) - For styles
-
-**Note: These are just examples. Delete this note and replace the list above with your own choices**
+- React
+- Tailwind CSS
+- Redux
 
 ### What I learned
 
-Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
+One of the key learnings from this project was the implementation of the Minimax algorithm for the computer's moves in the Tic Tac Toe game. The Minimax algorithm is a decision-making algorithm used in two-player games, and it helped me create a more strategic and competitive computer opponent.
 
-To see how you can add code snippets, see below:
+The Minimax algorithm works by recursively evaluating possible moves and their outcomes, assigning a score to each move based on the assumption that both players will make optimal moves. This allows the computer to make intelligent decisions and choose the move that minimizes the maximum possible loss (hence the name Minimax).
 
-```html
-<h1>Some HTML code I'm proud of</h1>
-```
-
-```css
-.proud-of-this-css {
-  color: papayawhip;
-}
-```
-
-```js
-const proudOfThisFunc = () => {
-  console.log("🎉");
-};
-```
-
-If you want more help with writing markdown, we'd recommend checking out [The Markdown Guide](https://www.markdownguide.org/) to learn more.
-
-**Note: Delete this note and the content within this section and replace with your own learnings.**
+Implementing the Minimax algorithm in the context of a Tic Tac Toe game provided insights into recursive algorithms, game tree structures, and how to apply strategic thinking to artificial intelligence in gaming scenarios. This experience was valuable in enhancing my understanding of algorithmic decision-making processes.
 
 ### Continued development
 
-Use this section to outline areas that you want to continue focusing on in future projects. These could be concepts you're still not completely comfortable with or techniques you found useful that you want to refine and perfect.
-
-**Note: Delete this note and the content within this section and replace with your own plans for continued development.**
+I plan to continue focusing on refining my React and Redux skills, exploring more advanced state management techniques, and further improving my responsiveness implementation.
 
 ### Useful resources
 
-- [Example resource 1](https://www.example.com) - This helped me for XYZ reason. I really liked this pattern and will use it going forward.
-- [Example resource 2](https://www.example.com) - This is an amazing article which helped me finally understand XYZ. I'd recommend it to anyone still learning this concept.
-
-**Note: Delete this note and replace the list above with resources that helped you during the challenge. These could come in handy for anyone viewing your solution or for yourself when you look back on this project in the future.**
+- [React Documentation](https://reactjs.org/docs/getting-started.html) - The official documentation is always a valuable resource for learning and reference.
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs) - The Tailwind CSS documentation provides comprehensive guidance on using the utility-first CSS framework.
 
 ## Author
 
@@ -109,6 +74,4 @@ Use this section to outline areas that you want to continue focusing on in futur
 
 ## Acknowledgments
 
-This is where you can give a hat tip to anyone who helped you out on this project. Perhaps you worked in a team or got some inspiration from someone else's solution. This is the perfect place to give them some credit.
-
-**Note: Delete this note and edit this section's content as necessary. If you completed this challenge by yourself, feel free to delete this section entirely.**
+I want to express my gratitude to the Frontend Mentor community for providing challenging projects and valuable feedback. Special thanks to anyone who contributed inspiration or guidance that helped me in completing this project.
